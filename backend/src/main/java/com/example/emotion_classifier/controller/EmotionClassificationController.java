@@ -19,10 +19,8 @@ public class EmotionClassificationController {
 
     @PostMapping("/predict")
     public ResponseEntity<EmotionResponse> predictEmotion(@RequestBody EmotionRequest request) {
-        // Predict emotion using Python model
         String predictedEmotion = pythonModelService.predictEmotion(request.getText());
 
-        // Create and return response
         EmotionResponse response = new EmotionResponse(predictedEmotion);
         return ResponseEntity.ok(response);
     }
