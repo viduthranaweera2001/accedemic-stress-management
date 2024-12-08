@@ -1,1 +1,1 @@
-Sinhala-Speech-Recognition-Module
+# accedemic-stress-management
