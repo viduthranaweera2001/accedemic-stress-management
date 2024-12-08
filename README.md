@@ -12,16 +12,19 @@ By analyzing Sinhala language voice input using a 16-item self-report scale, the
 
 # Key Dependencies
 
-1.Voice Processing:
+##1.Voice Processing:
+
 Audio capture and noise reduction libraries (e.g., PyAudio)
 Speech-to-text conversion tools (e.g., openai-whisper , Google Speech-to-Text API)
 
-2.Bilingual Language Processing:
+##2.Bilingual Language Processing:
+
 Natural Language Processing (NLP) libraries for Sinhala and English (e.g.,spacy , NLTK)
 Code-switching and code-mixing detection algorithms
 Sinhala-to-Singlish conversion models
 
-3.Stress Assessment:
+##3.Stress Assessment:
+
 Linguistic pattern recognition algorithms
 Likert scale mapping and confidence scoring methods
   
