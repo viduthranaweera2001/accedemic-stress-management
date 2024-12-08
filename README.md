@@ -27,13 +27,19 @@ Sinhala-to-Singlish conversion models
 
 Linguistic pattern recognition algorithms,
 Likert scale mapping and confidence scoring methods
+
+## 4.Personalized Therapy:
+
+Music therapy libraries (e.g., Python-Based Music Library)
+Meditation and mindfulness techniques (e.g., PyMindfulness)
+Peer support integration (e.g., chat, forums)
   
-## 4.User Interface:
+## 5.User Interface:
 
 Data visualization libraries (e.g., Matplotlib)
 User interaction and engagement components
 
-## 5.General::
+## 6.General::
 
 Machine learning and data analysis libraries (e.g., NumPy, Pandas, Scikit-learn)
 Configuration management and deployment utilities
