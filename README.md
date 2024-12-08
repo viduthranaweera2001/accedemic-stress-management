@@ -1,1 +1,1 @@
-# accedemic-stress-management
+# Voice-Based Academic Stress Analyzer
