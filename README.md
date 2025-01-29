@@ -15,7 +15,7 @@ A voice-based academic stress assessment system that processes Sinhala-English c
 
 ### System overview 
 
-
+![Image](https://github.com/user-attachments/assets/a7702f02-9ca9-4d6d-8582-d8400e18e4b6)
 
 ### Key Dependencies
 
