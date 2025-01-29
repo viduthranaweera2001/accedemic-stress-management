@@ -21,21 +21,21 @@ A voice-based academic stress assessment system that processes Sinhala-English c
 
 ### 1.Speech Processing
 
-wav2vec2.0 for ASR
-librosa for audio processing
-soundfile for audio I/O
+wav2vec2.0 for ASR, 
+librosa for audio processing, 
+soundfile for audio I/O, 
 
 ### 2.Machine Learning
 
-PyTorch for deep learning models
-transformers for BERT-based classification
-scikit-learn for traditional ML algorithms
+PyTorch for deep learning models, 
+transformers for BERT-based classification, 
+scikit-learn for traditional ML algorithms, 
 
 ### 3.Audio Processing
 
-pyAudioAnalysis for feature extraction
-scipy for signal processing
-numpy for numerical operations
+pyAudioAnalysis for feature extraction, 
+scipy for signal processing, 
+numpy for numerical operations, 
 
 ## Component 02 Name (git link)
 
