@@ -10,7 +10,7 @@ By analyzing Sinhala language voice input using a 16-item self-report scale, the
 
 ![system diagran drawio (2)](https://github.com/user-attachments/assets/4a99b0ba-e5d5-47ca-a7a5-7316776114e0)
 
-# Key Dependencies
+# Coponent 01 Name (git link)
 
 ## 1.Voice Processing:
 
@@ -28,18 +28,27 @@ Sinhala-to-Singlish conversion models
 Linguistic pattern recognition algorithms,
 Likert scale mapping and confidence scoring methods
 
+# System overview 
+
+##image
+
+# Component 02 Name (git link)
+
+# System overview 
+
+##image
+
 ## 4.Personalized Therapy:
 
 Music therapy libraries (e.g., Python-Based Music Library)
 Meditation and mindfulness techniques (e.g., PyMindfulness)
 Peer support integration (e.g., chat, forums)
+
+
+# Component 03 Name (git link)
+
+# System overview 
+
+##image
   
-## 5.User Interface:
 
-Data visualization libraries (e.g., Matplotlib)
-User interaction and engagement components
-
-## 6.General::
-
-Machine learning and data analysis libraries (e.g., NumPy, Pandas, Scikit-learn)
-Configuration management and deployment utilities
