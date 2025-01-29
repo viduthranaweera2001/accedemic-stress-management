@@ -10,7 +10,7 @@ By analyzing Sinhala language voice input using a 16-item self-report scale, the
 
 ![system diagran drawio (2)](https://github.com/user-attachments/assets/4a99b0ba-e5d5-47ca-a7a5-7316776114e0)
 
-## Component 01 - VoiceInputHandler (git link)
+## Component 01 - VoiceInputHandler ([Git Link](https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/stress-score-calculation-new))
 A voice-based academic stress assessment system that processes Sinhala-English code-mixed responses to evaluate student stress levels. The system combines speech recognition, tone analysis, and stress level classification to provide automated stress assessment.
 
 ### System overview 
