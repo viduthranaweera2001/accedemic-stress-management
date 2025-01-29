@@ -10,7 +10,7 @@ By analyzing Sinhala language voice input using a 16-item self-report scale, the
 
 ![system diagran drawio (2)](https://github.com/user-attachments/assets/4a99b0ba-e5d5-47ca-a7a5-7316776114e0)
 
-# Coponent 01 Name (git link)
+## Component 01 Name (git link)
 
 ## 1.Voice Processing:
 
@@ -28,13 +28,13 @@ Sinhala-to-Singlish conversion models
 Linguistic pattern recognition algorithms,
 Likert scale mapping and confidence scoring methods
 
-# System overview 
+## System overview 
 
 ##image
 
 # Component 02 Name (git link)
 
-# System overview 
+## System overview 
 
 ##image
 
@@ -45,9 +45,9 @@ Meditation and mindfulness techniques (e.g., PyMindfulness)
 Peer support integration (e.g., chat, forums)
 
 
-# Component 03 Name (git link)
+## Component 03 Name (git link)
 
-# System overview 
+## System overview 
 
 ##image
   
