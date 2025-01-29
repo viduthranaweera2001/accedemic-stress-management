@@ -10,27 +10,32 @@ By analyzing Sinhala language voice input using a 16-item self-report scale, the
 
 ![system diagran drawio (2)](https://github.com/user-attachments/assets/4a99b0ba-e5d5-47ca-a7a5-7316776114e0)
 
-## Component 01 Name (git link)
-
-### 1.Voice Processing:
-
-Audio capture and noise reduction libraries (e.g., PyAudio),
-Speech-to-text conversion tools (e.g., openai-whisper , Google Speech-to-Text API)
-
-### 2.Bilingual Language Processing:
-
-Natural Language Processing (NLP) libraries for Sinhala and English (e.g.,spacy , NLTK),
-Code-switching and code-mixing detection algorithms,
-Sinhala-to-Singlish conversion models
-
-### 3.Stress Assessment:
-
-Linguistic pattern recognition algorithms,
-Likert scale mapping and confidence scoring methods
+## VoiceInputHandler (git link)
+A voice-based academic stress assessment system that processes Sinhala-English code-mixed responses to evaluate student stress levels. The system combines speech recognition, tone analysis, and stress level classification to provide automated stress assessment.
 
 ### System overview 
 
-##image
+
+
+###Key Dependencies
+
+### 1.Speech Processing
+
+wav2vec2.0 for ASR
+librosa for audio processing
+soundfile for audio I/O
+
+### 2.Machine Learning
+
+PyTorch for deep learning models
+transformers for BERT-based classification
+scikit-learn for traditional ML algorithms
+
+### 3.Audio Processing
+
+pyAudioAnalysis for feature extraction
+scipy for signal processing
+numpy for numerical operations
 
 ## Component 02 Name (git link)
 
