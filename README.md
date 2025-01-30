@@ -61,7 +61,7 @@ Peer support integration (e.g., chat, forums)
 update the persons details and give analytics
 
 
-## Component 03 - AI Assisted Peer Support for Depression ([git link](https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/ai-peer-assistance))
+## Component 03 - AI Assisted Peer Support for Depression ([Git Link](https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/ai-peer-assistance))
 
 This study aims to assess the impact of interactive games on stress reduction. Participants will use heart rate monitors to track their stress levels before and after engaging in stress-relieving games or activities. AI will analyze both physiological data (heart rate) and behavioral data (game performance) to provide personalized feedback and visualizations. The effectiveness of the games in reducing stress will be evaluated using statistical analysis, ensuring a comprehensive approach to mental health support.
 
@@ -75,7 +75,7 @@ This study aims to assess the impact of interactive games on stress reduction. P
 Get pulse count ( ESP32, pulse sensor)
 
 ### 8.Machine Learning
-DistilBERT for emotional tone analysis,
+DistilBERT for emotional tone analysis
 scikit-learn for implementing traditional machine learning models for additional analysis
 Pandas for data handling and manipulation, working with heart rate and game performance data.
 
