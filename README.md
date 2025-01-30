@@ -37,7 +37,7 @@ pyAudioAnalysis for feature extraction,
 scipy for signal processing, 
 numpy for numerical operations, 
 
-## Component 02 - Personalized Therapy Recommendation ([Git link])https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/personalized-therapy-suggestion)
+## Component 02 - Personalized Therapy Recommendation ([Git link](https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/personalized-therapy-suggestion))
 
 ### System overview 
 This system offers a personalized approach to managing depression and stress through music therapy and meditation, incorporating real-time stress monitoring. It evaluates stress levels using questionnaires and pulse sensors, categorizing individuals into mild, moderate, or severe stages. Consequently, it provides customized music playlists and meditation practices tailored to each stage. Adaptive reminders ensure continued engagement, while follow-ups monitor the effectiveness of the interventions. Leveraging wearable devices and sophisticated algorithms, the system personalizes the interventions, making therapy accessible and scalable. 
