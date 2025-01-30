@@ -69,5 +69,16 @@ This study aims to assess the impact of interactive games on stress reduction. P
 
 ![system diagram](https://github.com/user-attachments/assets/e57972f0-bbbf-4ed0-929c-df1710fff66d)
 
-###image
+### Key Dependencies
+
+### 7.Heartbeat Inputs
+Get pulse count ( ESP32, pulse sensor)
+
+### 8.Machine Learning
+DistilBERT for emotional tone analysis,
+scikit-learn for implementing traditional machine learning models for additional analysis
+Pandas for data handling and manipulation, working with heart rate and game performance data.
+
+
+
   
