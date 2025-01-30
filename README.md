@@ -50,10 +50,9 @@ Meditation and mindfulness techniques (e.g., PyMindfulness)
 Peer support integration (e.g., chat, forums)
 
 
-## Component 03 Name (git link)
+## Component 03 Name1 (git link)
 
 ### System overview 
 
 ###image
   
-
