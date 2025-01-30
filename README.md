@@ -61,10 +61,13 @@ Peer support integration (e.g., chat, forums)
 update the persons details and give analytics
 
 
-## Component 03 Name1 (git link)
+## Component 03 - AI Assisted Peer Support for Depression ([git link](https://github.com/viduthranaweera2001/accedemic-stress-management/tree/feature/ai-peer-assistance))
+
+This study aims to assess the impact of interactive games on stress reduction. Participants will use heart rate monitors to track their stress levels before and after engaging in stress-relieving games or activities. AI will analyze both physiological data (heart rate) and behavioral data (game performance) to provide personalized feedback and visualizations. The effectiveness of the games in reducing stress will be evaluated using statistical analysis, ensuring a comprehensive approach to mental health support.
 
 ### System overview 
-This study aims to assess the impact of interactive games on stress reduction. Participants will use heart rate monitors to track their stress levels before and after engaging in stress-relieving games or activities. AI will analyze both physiological data (heart rate) and behavioral data (game performance) to provide personalized feedback and visualizations. The effectiveness of the games in reducing stress will be evaluated using statistical analysis, ensuring a comprehensive approach to mental health support.
+
+![system diagram](https://github.com/user-attachments/assets/e57972f0-bbbf-4ed0-929c-df1710fff66d)
 
 ###image
   
