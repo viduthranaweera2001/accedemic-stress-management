@@ -76,7 +76,9 @@ Get pulse count ( ESP32, pulse sensor)
 
 ### 8.Machine Learning
 DistilBERT for emotional tone analysis
+
 scikit-learn for implementing traditional machine learning models for additional analysis
+
 Pandas for data handling and manipulation, working with heart rate and game performance data.
 
 
