@@ -42,7 +42,8 @@ numpy for numerical operations,
 ### System overview 
 This system offers a personalized approach to managing depression and stress through music therapy and meditation, incorporating real-time stress monitoring. It evaluates stress levels using questionnaires and pulse sensors, categorizing individuals into mild, moderate, or severe stages. Consequently, it provides customized music playlists and meditation practices tailored to each stage. Adaptive reminders ensure continued engagement, while follow-ups monitor the effectiveness of the interventions. Leveraging wearable devices and sophisticated algorithms, the system personalizes the interventions, making therapy accessible and scalable. 
 
-###image
+### System overview 
+
 ![system diagram drawio](https://github.com/user-attachments/assets/aff86c75-7bcc-47c8-9639-402a9c7ac00a)
 
 ### Key Dependencies
