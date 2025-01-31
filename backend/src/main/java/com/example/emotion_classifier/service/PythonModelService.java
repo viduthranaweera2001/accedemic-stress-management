@@ -32,7 +32,6 @@ public class PythonModelService {
                 if (predictedEmotion == null || predictedEmotion.trim().isEmpty()) {
                     return "Unable to predict emotion";
                 }
-
                 return predictedEmotion.trim();
             }
         } catch (Exception e) {

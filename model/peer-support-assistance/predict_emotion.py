@@ -6,7 +6,7 @@ class EmotionPredictor:
     def __init__(self, model_path='emotion_classifier_model.pkl', 
                  vectorizer_path='vectorizer.pkl', 
                  label_encoder_path='label_encoder.pkl'):
-        # Load the trained model components
+
         self.classifier = joblib.load(model_path)
         self.vectorizer = joblib.load(vectorizer_path)
         self.label_encoder = joblib.load(label_encoder_path)
