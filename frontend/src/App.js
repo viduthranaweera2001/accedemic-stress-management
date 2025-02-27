@@ -1,7 +1,30 @@
-import './App.css';
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import GameZone from "./components/GameZone";
+import AiAssistance from "./components/AiAssistance";
 
+// <<<<<<< HEAD
+// const App = () => {
+//   return (
+//       <div className="app-container">
+//         <h1>Game Zone & AI Assistance</h1>
+//         <Tabs>
+//           <TabList>
+//             <Tab>Game Zone</Tab>
+//             <Tab>AI Assistance</Tab>
+//           </TabList>
+//
+//           <TabPanel>
+//             <GameZone />
+//           </TabPanel>
+//
+//           <TabPanel>
+//             <AiAssistance />
+//           </TabPanel>
+//         </Tabs>
+//       </div>
+// =======
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import AcademicStressForm from "./pages/AcademicStressForm";
@@ -62,6 +85,6 @@ function App() {
         </div>
       </Router>
   );
-}
+};
 
 export default App;
