@@ -10,15 +10,10 @@ import { PrintPlayerInMap } from "../../utils/Utils";
 const STAGE_HEIGHT = 18;
 const STAGE_WIDTH = 10;
 
-const initialMap = [...new Array(STAGE_HEIGHT)].map(() =>
-	[...new Array(STAGE_WIDTH)].map(() => ({ fill: 0, color: [] }))
-);
-
-const colors = [
-	"#e54b4b", "#9a031e", "#fcdc4d", "#005397", "#0bbcd6", "#20ad65", "#f8ebee"
-];
-
 // Block definitions
+const colors = [
+	"#e54b4b", "#9a031e", "#fcdc4d", "#005397", "#0bbcd6", "#20ad65", "#f8ebee",
+];
 const I = { bloco: [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]] };
 const O = { bloco: [[1, 1], [1, 1]] };
 const T = { bloco: [[0, 0, 0], [1, 1, 1], [0, 1, 0]] };
@@ -47,6 +42,11 @@ const getRandomPlayer = (player) => {
 };
 
 const Game = () => {
+	// Define initialMap inside the component
+	const initialMap = [...new Array(STAGE_HEIGHT)].map(() =>
+		[...new Array(STAGE_WIDTH)].map(() => ({ fill: 0, color: [] }))
+	);
+
 	const [map, setMap] = useState(initialMap);
 	const [player, setPlayer] = useState();
 	const [down, setDown] = useState(false);
@@ -60,17 +60,19 @@ const Game = () => {
 	const [dragX, setDragX] = useState(0);
 	const [dragY, setDragY] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
-	const [heartRateData, setHeartRateData] = useState(null); // State for heart rate data
+	const [heartRateData, setHeartRateData] = useState(null);
+	const [heartRateHistory, setHeartRateHistory] = useState([]);
 
-	// Fetch heart rate data from Flask server
+	// Fetch heart rate data
 	useEffect(() => {
 		const fetchHeartRateData = async () => {
 			try {
 				const response = await fetch("http://localhost:5001/getAnalysis");
-				console.log("Response status:", response.status); // Should be 200
 				const data = await response.json();
-				console.log("Fetched data:", data); // Inspect the data
 				setHeartRateData(data);
+				if (!gameOver && !pause) {
+					setHeartRateHistory((prev) => [...prev, { ...data, timestamp: Date.now() }]);
+				}
 			} catch (error) {
 				console.error("Error fetching heart rate data:", error);
 				setHeartRateData({ error: "Failed to fetch data" });
@@ -80,21 +82,24 @@ const Game = () => {
 		fetchHeartRateData();
 		const interval = setInterval(fetchHeartRateData, 2000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [gameOver, pause]);
 
+	// Level progression
 	useEffect(() => {
 		const levelBaseScore = 1000;
 		const nextLevel = level + 1;
 		const nextLevelScore = (levelBaseScore * nextLevel * nextLevel * nextLevel) / 5;
-		if (score >= nextLevelScore) setLevel(level + 1);
+		if (score >= nextLevelScore) setLevel(nextLevel);
 	}, [level, score]);
 
+	// Game functions
 	const restartGame = () => {
 		setMap(initialMap);
 		setLines(0);
 		setScore(0);
 		setLevel(1);
 		setGameOver(false);
+		setHeartRateHistory([]);
 	};
 
 	const loseGame = () => {
@@ -305,7 +310,6 @@ const Game = () => {
 		{ filterTaps: true, lockDirection: true }
 	);
 
-	// Render heart rate data with improved styling
 	const renderHeartRateData = () => {
 		if (!heartRateData) {
 			return <p style={{ color: "#777" }}>Loading heart rate data...</p>;
@@ -330,6 +334,89 @@ const Game = () => {
 		);
 	};
 
+	const generateHeartRateSummary = () => {
+		if (heartRateHistory.length === 0) {
+			return { message: "No heart rate data collected during the game." };
+		}
+		const heartRates = heartRateHistory.map((entry) => entry["Heart Rate"]).filter(Boolean);
+		const conditions = heartRateHistory.map((entry) => entry["Predicted Condition"]).filter(Boolean);
+		const avgHeartRate = heartRates.length
+			? (heartRates.reduce((sum, hr) => sum + hr, 0) / heartRates.length).toFixed(1)
+			: "N/A";
+		const mostFrequentCondition = conditions.length
+			? conditions.sort((a, b) =>
+				conditions.filter((c) => c === a).length - conditions.filter((c) => c === b).length
+			).pop()
+			: "N/A";
+		const duration = heartRateHistory.length
+			? ((heartRateHistory[heartRateHistory.length - 1].timestamp - heartRateHistory[0].timestamp) / 1000 / 60).toFixed(1)
+			: 0;
+		return {
+			avgHeartRate,
+			mostFrequentCondition,
+			totalMeasurements: heartRateHistory.length,
+			durationMinutes: duration,
+		};
+	};
+
+	const renderHeartRateSummary = () => {
+		const summary = generateHeartRateSummary();
+		if (!gameOver) return null;
+		return (
+			<div
+				style={{
+					position: "absolute",
+					top: "50%",
+					left: "50%",
+					transform: "translate(-50%, -50%)",
+					background: "#fff",
+					padding: "20px",
+					borderRadius: "10px",
+					boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+					zIndex: 20,
+					textAlign: "center",
+					// background: "#c4e1ff",
+					// marginTop: "40px",
+					// marginLeft: "390px",
+					// padding: "40px",
+					// borderRadius: "10px",
+					// boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+					// minHeight: "200px",
+					// overflow: "auto",
+					// boxSizing: "border-box",
+					// position: "relative",
+					// zIndex: 10,
+				}}
+			>
+				<h2 style={{ color: "#e74c3c" }}>Game Over - Heart Rate Summary</h2>
+				{summary.message ? (
+					<p>{summary.message}</p>
+				) : (
+					<>
+						<p><strong>Average Heart Rate:</strong> {summary.avgHeartRate} BPM</p>
+						<p><strong>Most Frequent Condition:</strong> {summary.mostFrequentCondition}</p>
+						<p><strong>Total Measurements:</strong> {summary.totalMeasurements}</p>
+						<p><strong>Game Duration:</strong> {summary.durationMinutes} minutes</p>
+					</>
+				)}
+				<button
+					onClick={restartGame}
+					style={{
+						marginTop: "15px",
+						padding: "10px 20px",
+						background: "#e74c3c",
+						color: "#fff",
+						border: "none",
+						borderRadius: "5px",
+						cursor: "pointer",
+					}}
+				>
+					Restart Game
+				</button>
+			</div>
+		);
+	};
+
 	if (!player || !map || !hintPlayer) {
 		return (
 			<Center>
@@ -347,21 +434,18 @@ const Game = () => {
 				fontFamily: "Arial, sans-serif",
 				maxWidth: "1500px",
 				margin: "0 auto",
-				gap: "40px", // Spacing between game and monitor
-				flexWrap: "wrap", // Allows wrapping on smaller screens
-				alignItems: "flex-start", // Aligns items to the top
-				position: "relative", // Ensure proper positioning context
+				gap: "40px",
+				flexWrap: "wrap",
+				alignItems: "flex-start",
+				position: "relative",
 			}}
 		>
-			{/* Left Side: Tetris Game */}
 			<div style={{ flex: "1", minWidth: "300px", maxWidth: "600px", position: "relative" }}>
-				<h1 style={{ textAlign: "center", color: "#333"}}>
-					{/*Tetris Game*/}
-				</h1>
-				<div style={{ position: "relative" }}> {/* Wrap Stage to control its positioning */}
+				<h1 style={{ textAlign: "center", color: "#000000" }}></h1>
+				<div style={{ position: "relative" }}>
 					<Stage
 						lose={gameOver}
-						restartClick={() => restartGame()}
+						restartClick={restartGame}
 						map={map}
 						player={player}
 						hint={hintPlayer}
@@ -372,43 +456,34 @@ const Game = () => {
 						tabIndex="0"
 						onKeyUp={keyUp}
 						onKeyDown={keyDown}
-						onClick={() => rotatePlayer()}
+						onClick={rotatePlayer}
 						{...bind()}
 					/>
+					{renderHeartRateSummary()}
 				</div>
 			</div>
 
-			{/* Right Side: Heart Rate Monitor */}
 			<div
 				style={{
-					// flex: "0 0 0 400px", // Fixed width to fit alongside Tetris
 					background: "#c4e1ff",
-					marginTop:"460px",
-					marginLeft:"390px",
+					marginTop: "460px",
+					marginLeft: "390px",
 					padding: "40px",
 					borderRadius: "10px",
 					boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
 					minHeight: "200px",
 					overflow: "auto",
 					boxSizing: "border-box",
-					position: "relative", // Ensure it stays in flow
-					zIndex: 10, // Ensure it stays above other elements if needed
+					position: "relative",
+					zIndex: 10,
 				}}
 			>
-				<h2
-					style={{
-						color: "#e74c3c",
-						marginBottom: "15px",
-						fontSize: "1.5em",
-						textAlign: "center",
-					}}
-				>
+				<h2 style={{ color: "#e74c3c", marginBottom: "15px", fontSize: "1.5em", textAlign: "center" }}>
 					Live Heart Rate Monitor
 				</h2>
 				{renderHeartRateData()}
 			</div>
 		</div>
-
 	);
 };
 
