@@ -366,8 +366,8 @@ const Game = () => {
 			<div
 				style={{
 					position: "absolute",
-					top: "50%",
-					left: "50%",
+					top: "80%",
+					left: "40%",
 					transform: "translate(-50%, -50%)",
 					background: "#fff",
 					padding: "20px",
