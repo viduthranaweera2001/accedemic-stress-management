@@ -1,0 +1,128 @@
+# version: '3.8'
+# services:
+#   # Database service
+#   db:
+#     build: ./database
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: rootpassword
+#       MYSQL_DATABASE: stress_detection
+#       MYSQL_USER: appuser
+#       MYSQL_PASSWORD: apppassword
+#     volumes:
+#       - mysql-data:/var/lib/mysql
+#     ports:
+#       - "3307:3306"
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+#   # Backend service
+#   backend:
+#     build: ./backend
+#     restart: always
+#     depends_on:
+#       db:
+#         condition: service_healthy
+#     environment:
+#       - DB_USER=appuser
+#       - DB_PASSWORD=apppassword
+#       - DB_HOST=db
+#       - DB_NAME=stress_detection
+#       - SECRET_KEY=your-secure-secret-key-change-in-production
+#       - CUDA_VISIBLE_DEVICES=-1  # CPU-only mode for TensorFlow
+#     volumes:
+#       - ./backend:/app
+#       - ./uploads:/app/uploads
+#       # Model volume mappings (read-only)
+#       # - ./models/emotion:/app/models/emotion:ro
+#       - ./models/emotion/emotion_model.keras:/app/models/emotion/emotion_model.keras:ro
+#       - ./models/asr/whisper-small:/app/models/asr/whisper-small:ro
+#       - ./models/text_classifier:/app/models/text_classifier:ro
+#     ports:
+#       - "8000:8000"
+#     deploy:
+#       resources:
+#         limits:
+#           memory: 2G  # Memory limit for CPU-only mode
+#   # Frontend service
+#   frontend:
+#     build: ./frontend
+#     restart: always
+#     depends_on:
+#       - backend
+#     environment:
+#       - REACT_APP_API_URL=http://your-backend-url/api
+#     ports:
+#       - "3000:80"
+# volumes:
+#   mysql-data:
+
+
+version: '3.8'
+services:
+  # Database service
+  db:
+    build: ./database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: stress_detection
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  # Backend service
+  backend:
+    build: ./backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_USER=appuser
+      - DB_PASSWORD=apppassword
+      - DB_HOST=db
+      - DB_NAME=stress_detection
+      - SECRET_KEY=your-secure-secret-key-change-in-production
+      - CUDA_VISIBLE_DEVICES=-1
+      - TF_CPP_MIN_LOG_LEVEL=2  # Reduce TensorFlow verbosity
+    volumes:
+      - ./backend:/app
+      - ./uploads:/app/uploads
+      # Mount models directory properly
+      - ./models:/app/models:ro
+      # Or mount individually if the above doesn't work
+      - ./models/emotion/emotion_model.keras:/app/models/emotion/emotion_model.keras:ro
+      - ./models/emotion/label_encoder.pkl:/app/models/emotion/label_encoder.pkl:ro
+      - ./models/asr/whisper-small:/app/models/asr/whisper-small:ro
+      - ./models/text_classifier/likert_classifier.joblib:/app/models/text_classifier/likert_classifier.joblib:ro
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 2G  # Memory limit for CPU-only mode
+  
+  # Frontend service
+#  frontend:
+#    build: ./frontend
+#    restart: always
+#    depends_on:
+#      - backend
+#    environment:
+#      - REACT_APP_API_URL=http://your-backend-url/api
+#    ports:
+#      - "3000:80"
+
+volumes:
+  mysql-data:
