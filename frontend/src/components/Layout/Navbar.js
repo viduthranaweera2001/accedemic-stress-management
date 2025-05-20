@@ -26,6 +26,7 @@ const NavigationBar = () => {
                 <Nav.Link as={Link} to="/therapy">Therapy</Nav.Link>
                 <Nav.Link as={Link} to="/game">Activity</Nav.Link>
                 <Nav.Link as={Link} to="/assistance">Assistance</Nav.Link>
+                
               </>
             ) : (
               <>
