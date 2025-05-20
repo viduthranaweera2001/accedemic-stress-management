@@ -17,6 +17,8 @@ import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import AssessmentScreen from './components/StressDetection/AssessmentScreen';
 import ResultsScreen from './components/StressDetection/ResultsScreen';
+import Game from "./components/Game/Game";
+import VirtualAssistance from "./components/Assistance/VirtualAssistance";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -67,6 +69,24 @@ function App() {
                       <ResultsScreen />
                     </ProtectedRoute>
                   } 
+                />
+
+                <Route
+                    path="/game"
+                    element={
+                      <ProtectedRoute>
+                        <Game />
+                      </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/assistance"
+                    element={
+                      <ProtectedRoute>
+                        <VirtualAssistance />
+                      </ProtectedRoute>
+                    }
                 />
                 
                 <Route path="/" element={<Navigate to="/dashboard" />} />
