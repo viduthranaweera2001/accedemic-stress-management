@@ -19,6 +19,8 @@ import AssessmentScreen from './components/StressDetection/AssessmentScreen';
 import ResultsScreen from './components/StressDetection/ResultsScreen';
 import Game from "./components/Game/Game";
 import VirtualAssistance from "./components/Assistance/VirtualAssistance";
+import PatientForm from "./components/Therapy/PatientForm";
+import TherapySessions from "./components/Therapy/TherapySessions";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -85,6 +87,23 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <VirtualAssistance />
+                      </ProtectedRoute>
+                    }
+                />
+                  <Route
+                    path="/patientform"
+                    element={
+                      <ProtectedRoute>
+                        <PatientForm/>
+                      </ProtectedRoute>
+                    }
+                />
+
+                  <Route
+                    path="/therapysessions"
+                    element={
+                      <ProtectedRoute>
+                        <TherapySessions/>
                       </ProtectedRoute>
                     }
                 />
