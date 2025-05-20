@@ -18,6 +18,9 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li><a href="/dashboard" className="text-white">Dashboard</a></li>
               <li><a href="/assessment" className="text-white">Take Assessment</a></li>
+              <li><a href="/therapy" className="text-white">Therapy</a></li>
+              <li><a href="/game" className="text-white">Activity</a></li>
+              <li><a href="/assistance" className="text-white">Assistance</a></li>
             </ul>
           </div>
         </div>
