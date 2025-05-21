@@ -58,7 +58,7 @@ const ResultsScreen = () => {
   return (
     <Container className="py-5">
       <h2 className="mb-4">Assessment Results</h2>
-      
+
       <Card className="shadow mb-4">
         <Card.Header className={`bg-${getStressLevelColor(results.final_stress_level)} text-white`}>
           <h3 className="mb-0">Your Stress Level</h3>
@@ -82,7 +82,7 @@ const ResultsScreen = () => {
           </Row>
         </Card.Body>
       </Card>
-      
+
       <Row>
         <Col md={6}>
           <Card className="shadow mb-4">
@@ -97,7 +97,7 @@ const ResultsScreen = () => {
             </Card.Body>
           </Card>
         </Col>
-        
+
         <Col md={6}>
           <Card className="shadow mb-4">
             <Card.Header>
@@ -118,7 +118,7 @@ const ResultsScreen = () => {
           </Card>
         </Col>
       </Row>
-      
+
       <Card className="shadow mb-4">
         <Card.Header>
           <h4 className="mb-0">Recommendations</h4>
@@ -134,7 +134,7 @@ const ResultsScreen = () => {
                 <li>Reach out to supportive friends, family, or academic advisors.</li>
               </>
             )}
-            
+
             {results.final_stress_level === 'Medium' && (
               <>
                 <li>Implement time management strategies to better organize your studies.</li>
@@ -144,7 +144,7 @@ const ResultsScreen = () => {
                 <li>Maintain a balanced diet and regular physical activity.</li>
               </>
             )}
-            
+
             {results.final_stress_level === 'Low' && (
               <>
                 <li>Continue your current coping strategies as they appear effective.</li>
@@ -154,7 +154,7 @@ const ResultsScreen = () => {
                 <li>Consider helping classmates who may be experiencing more stress.</li>
               </>
             )}
-            
+
             {results.final_stress_level === 'Minimal' && (
               <>
                 <li>Continue your effective stress management techniques.</li>
@@ -167,11 +167,29 @@ const ResultsScreen = () => {
           </ul>
         </Card.Body>
       </Card>
-      
+
       <div className="text-center mt-4">
         <Button variant="primary" onClick={() => navigate('/dashboard')}>
           Return to Dashboard
         </Button>
+        <Button
+            variant="success"
+            className="ms-2"
+            onClick={() => {
+
+              const levelMap = {
+                High: 9,
+                Medium: 7,
+                Low: 4,
+                Minimal: 2
+              };
+              const numericStressLevel = levelMap[results.final_stress_level] || 5;
+              navigate('/patientform', { state: { stressLevel: numericStressLevel } });
+            }}
+        >
+          Proceed to Therapy Form
+        </Button>
+
       </div>
     </Container>
   );
