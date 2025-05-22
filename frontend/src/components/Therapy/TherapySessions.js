@@ -381,7 +381,7 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
     e.preventDefault();
     setError(null);
     try {
-      const response = await fetch('http://localhost:8000/song-suggestions', {
+      const response = await fetch('http://localhost:8001/song-suggestions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
