@@ -11,11 +11,35 @@ const pulseKeyframes = `
 }
 `;
 
+// Helper to map stress and BPM to therapy time (8-20)
+function suggestTherapyTime(stressLevel, bpm) {
+  // Normalize stressLevel: 1-10
+  const s = Math.min(Math.max(Number(stressLevel), 1), 10);
+
+  // Normalize bpm: 65-90
+  let b = Number(bpm);
+  if (isNaN(b)) b = 65;
+  b = Math.min(Math.max(b, 65), 90);
+
+  // Stress factor: 0 (low) to 1 (high)
+  const stressFactor = (s - 1) / 9;
+  // BPM factor: 0 (65) to 1 (90)
+  const bpmFactor = (b - 65) / 25;
+
+  // Weighted average: stress 70%, bpm 30%
+  const combined = 0.7 * stressFactor + 0.3 * bpmFactor;
+
+  // Map to 8-20
+  return Math.round(8 + combined * (20 - 8));
+}
+
 const PatientForm = ({ onSubmit }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [formData, setFormData] = useState({
+    gender: '',
+    age: '',
     pulseRate: '',
     bloodPressure: '',
     therapyTime: '',
@@ -35,8 +59,17 @@ const PatientForm = ({ onSubmit }) => {
     }
   }, [location.state]);
 
-  // Replace with your ESP32's actual IP address shown in the Serial Monitor
-  const ESP32_IP = '192.168.8.2'; // Update this with your ESP32's IP address
+  // Suggest therapy time whenever stressLevel or pulseRate changes
+  useEffect(() => {
+    if (formData.stressLevel) {
+      setFormData(prev => ({
+        ...prev,
+        therapyTime: suggestTherapyTime(prev.stressLevel, prev.pulseRate)
+      }));
+    }
+  }, [formData.stressLevel, formData.pulseRate]);
+
+  const ESP32_IP = '192.168.8.2';
 
   const fetchBPM = async () => {
     if (isPulseLocked) {
@@ -101,8 +134,8 @@ const PatientForm = ({ onSubmit }) => {
   };
 
   const validateForm = () => {
-    // Check required fields (excluding bloodPressure)
-    const requiredFields = ['therapyTime', 'stressLevel'];
+    // Now require gender and age as well
+    const requiredFields = ['gender', 'age', 'therapyTime', 'stressLevel'];
     for (const field of requiredFields) {
       if (!formData[field]) {
         alert(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field`);
@@ -160,6 +193,39 @@ const PatientForm = ({ onSubmit }) => {
             <div className="card-body">
               <form onSubmit={handleStartTherapy}>
                 <div className="row g-3">
+
+                  {/* Gender */}
+                  <div className="col-md-6">
+                    <label htmlFor="gender" className="form-label">Gender</label>
+                    <select
+                        className="form-control"
+                        id="gender"
+                        value={formData.gender}
+                        onChange={(e) => handleInputChange('gender', e.target.value)}
+                        required
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Age */}
+                  <div className="col-md-6">
+                    <label htmlFor="age" className="form-label">Age</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="age"
+                        min="0"
+                        max="120"
+                        value={formData.age}
+                        onChange={(e) => handleInputChange('age', e.target.value)}
+                        required
+                    />
+                  </div>
+
                   {/* Pulse Rate */}
                   <div className="col-md-6">
                     <label htmlFor="pulseRate" className="form-label">
@@ -205,18 +271,7 @@ const PatientForm = ({ onSubmit }) => {
                         onChange={(e) => handleInputChange('bloodPressure', e.target.value)}
                     />
                   </div>
-                  {/* Therapy Time */}
-                  <div className="col-md-6">
-                    <label htmlFor="therapyTime" className="form-label">Available Time for Therapy (minutes)</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="therapyTime"
-                        value={formData.therapyTime}
-                        onChange={(e) => handleInputChange('therapyTime', e.target.value)}
-                        required
-                    />
-                  </div>
+
                   {/* Stress Level */}
                   <div className="col-md-6">
                     <label htmlFor="stressLevel" className="form-label">Stress Level (1-10)</label>
@@ -231,6 +286,22 @@ const PatientForm = ({ onSubmit }) => {
                         required
                     />
                   </div>
+
+                  {/* Therapy Time */}
+                  <div className="col-md-6">
+                    <label htmlFor="therapyTime" className="form-label">Time for Therapy (minutes)</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="therapyTime"
+                        min="8"
+                        max="20"
+                        value={formData.therapyTime}
+                        onChange={(e) => handleInputChange('therapyTime', e.target.value)}
+                        required
+                    />
+                  </div>
+
                 </div>
                 {/* Submit Button */}
                 <div className="d-grid mt-4">
