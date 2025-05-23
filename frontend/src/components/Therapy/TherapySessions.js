@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef} from "react";
 import { Container, Card, Button, Row, Col, ProgressBar, Form, Alert } from "react-bootstrap";
 import { FaMusic, FaHeartbeat, FaArrowLeft, FaHeadphones, FaGuitar, FaDrum, FaPlay, FaPause, FaLanguage } from "react-icons/fa";
 import YouTube from 'react-youtube';
@@ -1002,7 +1002,9 @@ const TherapyNavigation = () => {
   const [bpmHistory, setBpmHistory] = useState([]);
   const [showBpmGraph, setShowBpmGraph] = useState(false);
   const [language, setLanguage] = useState("en");
-  const ESP32_IP = '192.168.1.184';
+  const [connectionStatus, setConnectionStatus] = useState('Connecting...');
+  const intervalRef = useRef(null);
+  const ESP32_IP = '192.168.8.2';
 
   const t = translations[language];
 
@@ -1063,6 +1065,7 @@ const TherapyNavigation = () => {
       },
     ],
   };
+
 
   const bpmChartOptions = {
     scales: {
@@ -1188,7 +1191,7 @@ const TherapyNavigation = () => {
         {showBpmGraph && (
           <Card className="p-3 mt-4">
             <h4>{t.bpmOverTime}</h4>
-            {bpmHistory.length > 1 ? (
+            {bpmHistory.length > 0.5 ? (
               <div className="mt-3">
                 <Line data={bpmChartData} options={bpmChartOptions} />
               </div>

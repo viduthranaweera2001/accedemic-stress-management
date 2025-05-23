@@ -69,8 +69,7 @@ const PatientForm = ({ onSubmit }) => {
     }
   }, [formData.stressLevel, formData.pulseRate]);
 
-  // Replace with your ESP32's actual IP address shown in the Serial Monitor
-  const ESP32_IP = '192.168.8.2'; // Update this with your ESP32's IP address
+  const ESP32_IP = '192.168.8.2';
 
   const fetchBPM = async () => {
     if (isPulseLocked) {
