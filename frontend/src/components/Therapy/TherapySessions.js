@@ -624,6 +624,14 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
                   >
                     {t.cChord}
                   </Button>
+                  {/* C chord image */}
+                  <div>
+                    <img
+                        src="https://i.ibb.co/p6R3x2y6/c-code.png"
+                        alt="C Chord Fingering"
+                        style={{ maxWidth: "120px", margin: "10px 0" }}
+                    />
+                  </div>
                   <p>{t.cChordFingers}</p>
                 </div>
                 <div>
@@ -636,6 +644,14 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
                   >
                     {t.gChord}
                   </Button>
+                  <div>
+                    <img
+                        src="https://i.postimg.cc/N0YhHWHF/g-code.png"
+                        alt="G Chord Fingering"
+                        style={{ maxWidth: "120px", margin: "10px 0" }}
+                    />
+                  </div>
+
                   <p>{t.gChordFingers}</p>
                 </div>
                 <p>{t.switchChords}</p>
