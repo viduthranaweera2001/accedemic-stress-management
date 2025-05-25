@@ -564,7 +564,8 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
               <div>
                 <h5>{t.drummingActivity}</h5>
                 <p>{t.tapAlong}</p>
-                <audio ref={(node) => setAudioPlayer(node)} src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" loop />
+                {/*<audio ref={(node) => setAudioPlayer(node)} src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" loop />*/}
+                <audio ref={(node) => setAudioPlayer(node)} src="https://audio.jukehost.co.uk/4ZAJ9MfugpjM42ODIDVouMtA42YvLq2G" loop />
                 <Button
                   variant="primary"
                   onClick={() => {
@@ -618,7 +619,7 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
                   <Button
                     variant="outline-success"
                     onClick={() => {
-                      const audio = new Audio(`https://example.com/chords/C.mp3`);
+                      const audio = new Audio(`https://audio.jukehost.co.uk/ba0ApDMYapUTcjTCKLvRYlqlkZJZN9Cg`);
                       audio.play();
                     }}
                   >
@@ -638,7 +639,7 @@ const MusicTherapy = ({ patientData = defaultPatientData, onComplete, onBack, es
                   <Button
                     variant="outline-success"
                     onClick={() => {
-                      const audio = new Audio(`https://example.com/chords/G.mp3`);
+                      const audio = new Audio(`https://audio.jukehost.co.uk/GXfmBZHnaAFT9ct6BQsXJ6IQburn7yKb`);
                       audio.play();
                     }}
                   >
